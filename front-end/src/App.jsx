@@ -1,8 +1,7 @@
-import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './Layout/Layout'
-import LoginPage from '../pages/loginPage/LoginPage'
-import SignUp from '../pages/signUp/SignUp'
+import LoginPage from './pages/loginPage/LoginPage'
+import SignUp from './pages/signUp/SignUp'
 export default function App() {
     return (
         <Routes>
