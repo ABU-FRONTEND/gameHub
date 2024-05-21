@@ -5,7 +5,6 @@ import SignUp from './pages/signUp/SignUp'
 export default function App() {
     return (
         <Routes>
-
             <Route path='/' element={<Layout />} ></Route>
             <Route path='/auth'>
                 <Route index path='login' element={<LoginPage />} />
