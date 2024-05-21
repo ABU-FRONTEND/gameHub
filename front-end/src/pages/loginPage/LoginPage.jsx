@@ -1,4 +1,3 @@
-import axios from "axios"
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,6 +10,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import authServices from '../../services/authServices'
 
 const defaultTheme = createTheme();
 
@@ -20,14 +20,11 @@ export default function SignIn() {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const handleSubmit = async (event) => {
-        try {
-            event.preventDefault();
-            const response = await axios.post('/login', { username, password });
-            localStorage.setItem('token', JSON.stringify(response.data.token));
-            navigate('/');
-        } catch (error) {
-            console.error(error);
-        }
+        event.preventDefault();
+        const res = await authServices.login(username, password)
+        if(res){
+            navigate('/')
+        } 
     };
 
     return (

@@ -11,10 +11,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import axios from "axios"
-
-axios.defaults.baseURL = "http://localhost:1111"
+import authServices from '../../services/authServices';
 
 const defaultTheme = createTheme();
 
@@ -24,13 +21,11 @@ export default function SignUp() {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const handleSubmit = async (event) => {
-        try {
-            event.preventDefault();
-            const response = await axios.post('/signup', { username, nickname, password });
-            localStorage.setItem('token', JSON.stringify(response.data.token));
+        event.preventDefault();
+        const res = await authServices.register(username, nickname, password)
+        console.log(res)
+        if(res){
             navigate('/')
-        } catch (e) {
-            console.log(e);
         }
     };
 
