@@ -16,6 +16,7 @@ import authServices from '../../services/authServices';
 const defaultTheme = createTheme();
 
 export default function SignUp() {
+    const [error, setError] = useState('');
     const [username, setUsername] = useState('');
     const [nickname, setNickname] = useState('');
     const [password, setPassword] = useState('');
@@ -26,6 +27,10 @@ export default function SignUp() {
         console.log(res)
         if(res){
             navigate('/')
+            setError('')
+        } 
+        else{
+            setError(`Noto'g'ri foydalanuvchi nomi yoki parol`) 
         }
     };
 
@@ -47,7 +52,7 @@ export default function SignUp() {
                     <Typography component="h1" variant="h5">
                         Sign up
                     </Typography>
-                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3, position: 'relative' }}>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
                                 <TextField
@@ -84,6 +89,7 @@ export default function SignUp() {
                                 />
                             </Grid>
                         </Grid>
+                        <Box component={'span'} sx={{ color: 'red', fontWeight: 'bold',fontSize: '12px', position:'absolute', bottom: '82px', left: 0 }}>{error}</Box>
                         <Button
                             type="submit"
                             fullWidth
