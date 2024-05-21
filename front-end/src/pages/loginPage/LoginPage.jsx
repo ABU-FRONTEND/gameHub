@@ -15,7 +15,7 @@ import authServices from '../../services/authServices'
 const defaultTheme = createTheme();
 
 export default function SignIn() {
-    
+    const [error, setError] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -24,7 +24,11 @@ export default function SignIn() {
         const res = await authServices.login(username, password)
         if(res){
             navigate('/')
-        } 
+            setError('')
+        }
+        else{
+            setError(`Noto'g'ri foydalanuvchi nomi yoki parol`)
+        }
     };
 
     return (
@@ -45,7 +49,7 @@ export default function SignIn() {
                     <Typography component="h1" variant="h5">
                         Sign in
                     </Typography>
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, position: 'relative' }}>
                         <TextField
                             margin="normal"
                             required
@@ -68,6 +72,7 @@ export default function SignIn() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
+                        <Box component={'span'} sx={{ color: 'red', fontWeight: 'bold',fontSize: '12px', position:'absolute', bottom: '82px', left: 0 }}>{error}</Box>
                         <Button
                             type="submit"
                             fullWidth
