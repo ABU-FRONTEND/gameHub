@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import cors from "cors";
 import { register, login } from "./controllers.js";
 import { registerValidators, loginValidators } from "./validators.js";
 import { handleValidationErrors } from "./utils/handleValidationErrors.js";
@@ -11,7 +12,8 @@ mongoose.connect('mongodb+srv://admin:ajcuzU0RBWuMK6ke@cluster0.cnvcwtj.mongodb.
 })
 
 const app = express();
-app.use(express.json());
+app.use(express.json())
+app.use(cors());
 
 app.listen(1111, () => {
     console.log("Server started on http://localhost:1111");
