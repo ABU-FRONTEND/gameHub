@@ -67,3 +67,24 @@ export async function login(req, res) {
         });
     }
 }
+
+export async function getMe(req, res) {
+    try {
+        const user = await User.findById(req.userId);
+        console.log(req.userId)
+        if (!user) {
+            return res.status(404).json({
+                message: 'User not found',
+            });
+        }
+        delete user._doc.passwordHash;
+        res.json({
+            ...user._doc,
+        });
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({
+            message: 'Failed to get user',
+        });
+    }
+}
