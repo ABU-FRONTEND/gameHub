@@ -8,9 +8,9 @@ import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 export default function Profile() {
     let [userData, setUserData] = useState('')
     useEffect(() => {
-        authServices.getProfile()
+        authServices.getUser()
             .then((res) => {
-                console.log(res)
+                console.log(res);
             })
             .catch((err) => {
                 console.log(err)

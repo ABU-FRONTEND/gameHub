@@ -25,6 +25,19 @@ class AuthServices {
     logout = () => {
         localStorage.removeItem('token');
     }
+
+    getUser = async () => {
+        try {
+            const response = await axios.get('/getMe', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            });
+            return response.data;
+        } catch (e) {
+            console.error(e);
+        }
+    }
 }
 
 export default new AuthServices();
